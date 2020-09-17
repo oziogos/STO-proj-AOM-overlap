@@ -1,0 +1,24 @@
+
+mode		molecule
+verb		default
+
+name		ethylene
+molecule	ethylene.xyz
+basis		DZVP-GTH
+basis_file	GTH_BASIS_SETS
+MO_file		ethylene_molecule_type_1.MOLog
+MO			6
+cube		yes
+
+#-----------------------------------------------------------------------------------------
+
+MO_channel	1
+
+cube_grid	0.25
+
+proj_mu	H	1.0000
+proj_mu	C	1.6083	1.4440
+proj_mu	N	1.9237	1.3340
+proj_mu	O	2.2458	2.2266
+proj_mu	S	2.1223	1.5850
+
