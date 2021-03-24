@@ -29,24 +29,6 @@ Once the libraries are properly defined in the makefile, just run:
 make
 
 ------------------------------------------------------------------------------------------
- Testing instructions
-----------------------
-
-Go to ./test/STO_proj and run:
-
-./run_test_STO_proj.sh
-
-Compare the AOM_COEFF files with the reference files inside the OUTPUT directory.
-
-Go to ./test/AOM_overlap and run:
-
-./run_test_AOM_overlap.py
-
-! WARNING: this test procedure uses files from the STO projection tests. Make sure that you run the tests in the STO_proj directory first!
-
-Compare the console output with the OUTPUT reference file.
-
-------------------------------------------------------------------------------------------
  Keywords
 ----------
 
