@@ -30,7 +30,8 @@ void initialize_STO(int atoms,char **species,double *smu_per_species,double *pmu
         }
         if(strcmp(species[i],"C")==0||
            strcmp(species[i],"N")==0||
-           strcmp(species[i],"O")==0){
+           strcmp(species[i],"O")==0||
+           strcmp(species[i],"F")==0){
             ++j;(*STO_id_array)[j]=i+1;(*STO_type_array)[j]=2;
             ++j;(*STO_id_array)[j]=i+1;(*STO_type_array)[j]=3;
             ++j;(*STO_id_array)[j]=i+1;(*STO_type_array)[j]=4;
@@ -72,6 +73,7 @@ int resolveSTOnum(char *species)
     if(strcmp(species,"C")==0)STOs=1+3;
     if(strcmp(species,"N")==0)STOs=1+3;
     if(strcmp(species,"O")==0)STOs=1+3;
+    if(strcmp(species,"F")==0)STOs=1+3;
     if(strcmp(species,"S")==0)STOs=1+3;
     return STOs;
 }
@@ -92,6 +94,10 @@ double resolveSTOmu(char *species,int type,double *smu_per_species,double *pmu_p
     if(strcmp(species,"N")==0&&type==3)res=pmu_per_species[resolve_atomic_Z(species)-1];
     if(strcmp(species,"N")==0&&type==4)res=pmu_per_species[resolve_atomic_Z(species)-1];
     if(strcmp(species,"N")==0&&type==5)res=pmu_per_species[resolve_atomic_Z(species)-1];
+    if(strcmp(species,"F")==0&&type==2)res=smu_per_species[resolve_atomic_Z(species)-1];
+    if(strcmp(species,"F")==0&&type==3)res=pmu_per_species[resolve_atomic_Z(species)-1];
+    if(strcmp(species,"F")==0&&type==4)res=pmu_per_species[resolve_atomic_Z(species)-1];
+    if(strcmp(species,"F")==0&&type==5)res=pmu_per_species[resolve_atomic_Z(species)-1];
     if(strcmp(species,"S")==0&&type==6)res=smu_per_species[resolve_atomic_Z(species)-1];
     if(strcmp(species,"S")==0&&type==7)res=pmu_per_species[resolve_atomic_Z(species)-1];
     if(strcmp(species,"S")==0&&type==8)res=pmu_per_species[resolve_atomic_Z(species)-1];

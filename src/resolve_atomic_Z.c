@@ -20,6 +20,7 @@ int resolve_atomic_Z(char *species)
     if(strcmp(species,"C")==0)res=6;
     if(strcmp(species,"N")==0)res=7;
     if(strcmp(species,"O")==0)res=8;
+    if(strcmp(species,"F")==0)res=9;
     if(strcmp(species,"S")==0)res=16;
     return res;
 }

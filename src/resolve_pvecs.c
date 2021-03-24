@@ -17,6 +17,7 @@ void resolve_pvecs(int atoms,double *x,double *y,double *z,char **species,double
 void resolve_pvecs(int atoms,double *x,double *y,double *z,char **species,double **px,double **py,double **pz)
 {
     int i,j,k,aoinum,*atomlist,*active;
+    int int_neighbourlist[4][4];
     double neighbourlist[4][4],dist;
     double veca_x,veca_y,veca_z,vecb_x,vecb_y,vecb_z,ux,uy,uz;
     
@@ -27,6 +28,7 @@ void resolve_pvecs(int atoms,double *x,double *y,double *z,char **species,double
     for(i=0;i<atoms;++i){active[i]=0;if(resolve_atomic_Z(species[i])!=1){active[i]=1;++aoinum;atomlist[aoinum-1]=i;}}
     
     // calculate p vectors
+    // Bohr to Ang: 0.529177249
     *px=(double*)malloc(atoms*sizeof(double));
     *py=(double*)malloc(atoms*sizeof(double));
     *pz=(double*)malloc(atoms*sizeof(double));
@@ -39,6 +41,7 @@ void resolve_pvecs(int atoms,double *x,double *y,double *z,char **species,double
             dist=(x[atomlist[i]]-x[k])*(x[atomlist[i]]-x[k])+(y[atomlist[i]]-y[k])*(y[atomlist[i]]-y[k])+(z[atomlist[i]]-z[k])*(z[atomlist[i]]-z[k]);dist=sqrt(dist);
             if(atomlist[i]!=k && dist<3.5)
             {
+                int_neighbourlist[0][j]=k+1;
                 neighbourlist[1][j]=x[k];
                 neighbourlist[2][j]=y[k];
                 neighbourlist[3][j]=z[k];
@@ -47,9 +50,32 @@ void resolve_pvecs(int atoms,double *x,double *y,double *z,char **species,double
         }
         if(j==2)
         {
+            int_neighbourlist[0][2]=atomlist[i]+1;
             neighbourlist[1][2]=x[atomlist[i]];
             neighbourlist[2][2]=y[atomlist[i]];
             neighbourlist[3][2]=z[atomlist[i]];
+        }
+        if(j==1)
+        {
+            int_neighbourlist[0][1]=atomlist[i]+1;
+            neighbourlist[1][1]=x[atomlist[i]];
+            neighbourlist[2][1]=y[atomlist[i]];
+            neighbourlist[3][1]=z[atomlist[i]];
+            for(k=0;k<atoms;++k)
+            {
+                if(int_neighbourlist[0][0]!=k+1 && int_neighbourlist[0][1]!=k+1)
+                {
+                    dist=(x[int_neighbourlist[0][0]-1]-x[k])*(x[int_neighbourlist[0][0]-1]-x[k])+(y[int_neighbourlist[0][0]-1]-y[k])*(y[int_neighbourlist[0][0]-1]-y[k])+(z[int_neighbourlist[0][0]-1]-z[k])*(z[int_neighbourlist[0][0]-1]-z[k]);dist=sqrt(dist);
+                    if(dist<3.5)
+                    {
+                        int_neighbourlist[0][2]=k+1;
+                        neighbourlist[1][2]=x[k];
+                        neighbourlist[2][2]=y[k];
+                        neighbourlist[3][2]=z[k];
+                        break;
+                    }
+                }
+            }
         }
         veca_x=neighbourlist[1][0]-neighbourlist[1][2];
         veca_y=neighbourlist[2][0]-neighbourlist[2][2];

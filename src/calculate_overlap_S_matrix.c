@@ -39,7 +39,7 @@ void calculate_overlap_S_matrix(int STOs,double *x,double *y,double *z,int *STO_
     if(verb==-1){
         // console output
         printf("Single molecule STO overlap matrix (Smatrix):\n");
-        for(i=0;i<STOs;++i){for(j=0;j<STOs;++j){printf("%.4lf\t",(*Smatrix)[i][j]);}printf("\n");}
+        for(i=0;i<STOs;++i){for(j=0;j<STOs;++j){printf("%lf\t",(*Smatrix)[i][j]);}printf("\n");}
         printf("\n--------------------------------------------------------------------------\n\n");
     }
 }

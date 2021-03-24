@@ -34,6 +34,10 @@ OBJS +=  \
 	$(SRC_DIR)/resolve_pvecs.o \
 	$(SRC_DIR)/resolve_unique_species.o \
 	$(SRC_DIR)/tokenize2.o \
+        $(SRC_DIR)/simplex_obj_f.o \
+        $(SRC_DIR)/run_simplex.o \
+        $(SRC_DIR)/AOM_simplex_obj_f.o \
+        $(SRC_DIR)/write_state.o \
 
 STD_LIBS = -lm -llapack -lblas -lgfortran
 #################### Target #####################################

@@ -87,7 +87,7 @@ void create_cube_file(char *current_folder,char *STOproj_cube_grid,char *STOproj
                         mu3s=0.0;
                         mu3p=0.0;
                     }
-                    if(atomicZ==6 || atomicZ==7 || atomicZ==8){
+                    if(atomicZ==6 || atomicZ==7 || atomicZ==8 || atomicZ==9){
                         c1s=0.0;
                         c2s=STO_matrix[i][0];
                         c2px=STO_matrix[i][1];
