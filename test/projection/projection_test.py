@@ -3,6 +3,7 @@ import json
 import time
 import ast
 import numpy as np
+import tarfile
 
 # executable relative path
 path_to_bin = '../../src/STO_proj_AOM_overlap'
@@ -31,8 +32,6 @@ atol = 1.0e-6
 # leave empty for all molecules or specify, e.g. ['84a', 'n11']
 target = []
 
-# -------------------------------------------------------------------
-
 # read json files
 with open('single_molecules.json') as fp:
     ref_data = json.load(fp)
@@ -46,6 +45,11 @@ counter = 0
 passed = 0
 for key, value in test_configuration.items():
     if key in target or target == []:
+        
+        tar = tarfile.open(value["MOLog"].split('.MOLog')[0]+'.tgz')
+        tar.extractall()
+        tar.close()
+        
         counter += 1
         config = []
         config.append('mode\tmolecule')
@@ -100,4 +104,5 @@ for key, value in test_configuration.items():
         os.system(f'rm {key}_projection.txt')
         os.system(f'rm AOM_*{key}*.include')
         os.system(f'rm log*{basis}*dat')
+        os.system(f'rm {value["MOLog"]}')
 
