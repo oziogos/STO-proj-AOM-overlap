@@ -2,8 +2,8 @@
  
  Unified STO projection / AOM overlap code
  
- Alpha version: 0.1
- 1-Oct-2019
+ Beta version: 1.0
+ 1-Mar-2019
  
  Orestis George Ziogos, UCL
  o.ziogos@ucl.ac.uk
@@ -228,11 +228,23 @@ void read_config_file(char *current_folder,char *config_file,char *mode,char *ST
         
         *simplex_HAB=(double*)malloc(*simplex_entries*sizeof(double));
         
+        simplex->eval_metric=1;
+        
         for(i=0;i<*simplex_entries;++i)
         {
             fgets(buffer,cmax_length,fp);
-            printf("%s",buffer);
-            sscanf(buffer,"%s\t%s\t%s\t%d\t%lf",(*simplex_name)[i],(*simplex_dimer)[i],(*simplex_AOM_include)[i],&(*simplex_frag1_atoms)[i],&(*simplex_HAB)[i]);
+            //sscanf(buffer,"%s\t%s\t%s\t%d\t%lf",(*simplex_name)[i],(*simplex_dimer)[i],(*simplex_AOM_include)[i],&(*simplex_frag1_atoms)[i],&(*simplex_HAB)[i]);
+            sscanf(buffer,"%s\t%s\t%s\t%d\t%s",(*simplex_name)[i],(*simplex_dimer)[i],(*simplex_AOM_include)[i],&(*simplex_frag1_atoms)[i],word);
+            if(strcmp(word,"N/A")==0)
+            {
+                simplex->eval_metric=0;
+                (*simplex_HAB)[i]=0.0;
+            }
+            else
+            {
+                printf("%s",buffer);
+                sscanf(word,"%lf",&(*simplex_HAB)[i]);
+            }
         }
         
         rewind(fp);

@@ -1,4 +1,16 @@
-
+/* -----------------------------------------------------------------------------
+ 
+ Unified STO projection / AOM overlap code
+ 
+ Beta version: 1.0
+ 1-Mar-2019
+ 
+ Orestis George Ziogos, UCL
+ o.ziogos@ucl.ac.uk
+ 
+ For more information, examine the README file in the parent directory.
+ 
+-------------------------------------------------------------------------------- */
 #include"general.h"
 
 void initialize_STO(int atoms,char **species,double *smu_per_species,double *pmu_per_species,int *STOs,int **STO_id_array,int **STO_type_array,double **STO_mu_array,int verb);
@@ -124,23 +136,30 @@ double AOM_simplex_obj_f(double *smu_per_species,double *pmu_per_species,struct 
     beta2=A0/A1;
     chisq=0.0;for(i=0;i<n;++i)chisq=chisq+(fabs(current_input.HAB[i])-(beta2*fabs((*res)[i])))*(fabs(current_input.HAB[i])-(beta2*fabs((*res)[i])));
     */
-    int nlog=0;
-    double xlog[n],ylog[n];
-    for(i=0;i<n;++i)
+    
+    if(current_input.eval_metric!=0)
     {
-        if(fabs((*res)[i])>0.0&&fabs(current_input.HAB[i])>0.0)
+        int nlog=0;
+        double xlog[n],ylog[n];
+        for(i=0;i<n;++i)
         {
-            xlog[nlog]=log10(fabs((*res)[i]));
-            ylog[nlog]=log10(fabs(current_input.HAB[i]));
-            nlog=nlog+1;
+            if(fabs((*res)[i])>0.0&&fabs(current_input.HAB[i])>0.0)
+            {
+                xlog[nlog]=log10(fabs((*res)[i]));
+                ylog[nlog]=log10(fabs(current_input.HAB[i]));
+                nlog=nlog+1;
+            }
         }
+        
+        A1=2.0*nlog;
+        A0=0.0;A2=0.0;for(i=0;i<nlog;++i){A0=A0+ylog[i];A2=A2+xlog[i];}A0=-2.0*A0;A2=2.0*A2;
+        beta1=-(A0+A2)/A1;
+        chisq_log=0.0;for(i=0;i<nlog;++i)chisq_log=chisq_log+(ylog[i]-(beta1+xlog[i]))*(ylog[i]-(beta1+xlog[i]));
+        chisq_log=chisq_log/nlog;
     }
-    
-    A1=2.0*nlog;
-    A0=0.0;A2=0.0;for(i=0;i<nlog;++i){A0=A0+ylog[i];A2=A2+xlog[i];}A0=-2.0*A0;A2=2.0*A2;
-    beta1=-(A0+A2)/A1;
-    chisq_log=0.0;for(i=0;i<nlog;++i)chisq_log=chisq_log+(ylog[i]-(beta1+xlog[i]))*(ylog[i]-(beta1+xlog[i]));
-    chisq_log=chisq_log/nlog;
-    
+    else
+    {
+        chisq_log=-1.0;
+    }
     return chisq_log;
 }

@@ -1,3 +1,16 @@
+/* -----------------------------------------------------------------------------
+ 
+ Unified STO projection / AOM overlap code
+ 
+ Beta version: 1.0
+ 1-Mar-2019
+ 
+ Orestis George Ziogos, UCL
+ o.ziogos@ucl.ac.uk
+ 
+ For more information, examine the README file in the parent directory.
+ 
+-------------------------------------------------------------------------------- */
 #include"general.h"
 
 #define simplex_equal_diff 1.0e-16
@@ -169,7 +182,7 @@ void run_simplex(double *smu_per_species,double *pmu_per_species,struct simplex_
         {
             metric=AOM_simplex_obj_f( smu_per_species,pmu_per_species,current_input,&res);
             for(i=0;i<current_input.simplex_entries;++i)printf("%.6lf;",res[i]);printf("\n");
-            printf("%lf\n",metric);
+            if(current_input.eval_metric==1)printf("%lf\n",metric);
         }
     }
     else

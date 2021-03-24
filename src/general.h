@@ -2,8 +2,8 @@
  
  Unified STO projection / AOM overlap code
  
- Alpha version: 0.1
- 1-Oct-2019
+ Beta version: 1.0
+ 1-Mar-2019
  
  Orestis George Ziogos, UCL
  o.ziogos@ucl.ac.uk
@@ -65,6 +65,9 @@ struct simplex_obj_f_input {
     double *HAB;
     
     int mode;
+    
+    int eval_metric;
+    
 };
 
 
@@ -82,5 +85,7 @@ struct simplex_params {
     
     double p_mu_sample_step[16];
     double p_mu_sample_max[16];
+    
+    int eval_metric;
     
 };

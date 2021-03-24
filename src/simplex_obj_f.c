@@ -1,4 +1,16 @@
-
+/* -----------------------------------------------------------------------------
+ 
+ Unified STO projection / AOM overlap code
+ 
+ Beta version: 1.0
+ 1-Mar-2019
+ 
+ Orestis George Ziogos, UCL
+ o.ziogos@ucl.ac.uk
+ 
+ For more information, examine the README file in the parent directory.
+ 
+-------------------------------------------------------------------------------- */
 #include"general.h"
 
 void initialize_STO(int atoms,char **species,double *smu_per_species,double *pmu_per_species,int *STOs,int **STO_id_array,int **STO_type_array,double **STO_mu_array,int verb);

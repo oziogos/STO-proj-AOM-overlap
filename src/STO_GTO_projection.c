@@ -2,8 +2,8 @@
  
  Unified STO projection / AOM overlap code
  
- Alpha version: 0.1
- 1-Oct-2019
+ Beta version: 1.0
+ 1-Mar-2019
  
  Orestis George Ziogos, UCL
  o.ziogos@ucl.ac.uk
