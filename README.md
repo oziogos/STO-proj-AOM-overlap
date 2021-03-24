@@ -5,8 +5,8 @@ A unified interface of the Analytic Overlap Method (AOM) with CP2K DFT simulatio
  Unified STO projection / AOM overlap code
 -------------------------------------------
 
- Alpha version: 0.1
- 1-Oct-2019
+ Beta version: 1.0
+ 1-March-2021
  
  Orestis George Ziogos, UCL
  oziogos@gmail.com
