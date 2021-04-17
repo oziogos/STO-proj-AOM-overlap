@@ -2,8 +2,8 @@
  
  Unified STO projection / AOM overlap code
  
- Beta version: 1.0
- 1-Mar-2019
+ Alpha version: 0.1
+ 1-Oct-2019
  
  Orestis George Ziogos, UCL
  o.ziogos@ucl.ac.uk
@@ -127,9 +127,9 @@ void create_cube_file(char *current_folder,char *STOproj_cube_grid,char *STOproj
                 }
                 if(sum*sum>print_thres)
                     if(sum<0.0)
-                        fprintf(fp,"%.3g ",sum*sum);
+                        fprintf(fp,"%.3g ",-fabs(sum));
                     else
-                        fprintf(fp,"%.3g ",-sum*sum);
+                        fprintf(fp,"%.3g ",fabs(sum));
                     else
                         fprintf(fp,"%.3g ",0.0);
                 if (iz % 6 == 5)

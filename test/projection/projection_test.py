@@ -103,6 +103,6 @@ for key, value in test_configuration.items():
         os.system(f'rm {key}_state.dat')
         os.system(f'rm {key}_projection.txt')
         os.system(f'rm AOM_*{key}*.include')
-        os.system(f'rm log*{basis}*dat')
         os.system(f'rm {value["MOLog"]}')
-
+for log_file in [i for i in os.listdir() if i.startswith('log_') and i.endswith('.dat') and i.find(basis)!=-1]:
+    os.system(f'rm {log_file}')
